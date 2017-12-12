@@ -1,9 +1,17 @@
 # candycrush
 package CandyCrush;
 
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import CandyCrush.Shape.Balls;
 
 public class CandyCrush extends JFrame
 {
@@ -27,20 +35,20 @@ public class CandyCrush extends JFrame
        return statusbar;
    }
 
-    public static void main(String[] args)
-    {
-        CandyCrush newGame = new CandyCrush();
-        newGame.setLocationRelativeTo(null);
-        newGame.setVisible(true);
-        newGame.setAlwaysOnTop(true);
-        newGame.setResizable(false);
-
+    
+     public void actionPerformed(ActionEvent e) {
+        if (isFallingFinished) {
+            isFallingFinished = false;
+            newPiece();
+        } else {
+            oneLineDown();
+        }
     }
-}
-package CandyCrush;
+    int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
+    int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
+    Balls shapeAt(int x, int y) { return board[(y * BoardWidth) + x]; }
 
-import java.util.Random;
-import java.lang.Math;
+}
 
 
 public class Shape
