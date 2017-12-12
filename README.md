@@ -122,6 +122,19 @@ public class Shape
         Balls[] values = Balls.values(); 
         setShape(values[x]);
     }
+     private void newPiece()
+    {
+        curPiece.setRandomShape();
+        curX = BoardWidth / 2 + 1;
+        curY = BoardHeight - 1 + curPiece.minY();
+        if (!tryMove(curPiece, curX, curY)) {
+            curPiece.setShape(Balls.nStripes);
+            timer.stop();
+            isStarted = false;
+            statusbar.setText("game over");
+        }
+    }
+
 
     public int minX()
     {
